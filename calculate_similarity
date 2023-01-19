@@ -1,0 +1,19 @@
+#эта функция принимает колонку с текстами и возвращает вектор похожести текста t на текст t-1, порог похожести каждого предложения 0.95 (до 5% замен на предложение)
+
+def calculate_similarity(column):
+    S = []
+    i = 0
+    while i < len(column) - 1:
+        z = 0
+        x = [sent for sent in column[i].sents]
+        for sent in column[i].sents:
+            for sent2 in column[i+1].sents:
+                if sent.similarity(sent2) > 0.95:
+                    z += 1
+    
+        y = float(z/len(x))
+        S.append(y)
+        
+        i += 1    
+        
+    return S
